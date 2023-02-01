@@ -7,5 +7,5 @@ RUN pip install pipenv
 RUN pipenv install --ignore-pipfile
 
 COPY ./compose/production/django/start /start
-
+RUN chmod +x /start
 ENTRYPOINT ["/start"]
