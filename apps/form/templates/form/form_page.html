@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load static wagtailcore_tags %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form_page.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div style="display: flex ;flex-direction: column; justify-content: center; align-items: stretch;">
+        <div style="display: flex">
+            <img style="border-radius:2rem ;width:80% ;margin: auto "
+                 src="{{ page.banner.url }}">
+        </div>
+        <div class="col-1" id="cader">
+            <div id="wightcader">
+                <h1 id="title">{{ from.title }}</h1>
+                <p class="intro-message">
+                    {{ page.intro|richtext}}
+                </p>
+                <form action="{% pageurl page %}" method="POST" onsubmit="return  dataValidation()">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input id="submit" type="submit" value="ثــبــت">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'js/form_page.js' %}"></script>
+{% endblock %}
