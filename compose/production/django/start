@@ -1,3 +1,4 @@
 #!/bin/bash
 
+pipenv run python manage.py collectstatic --noinput --clear
 pipenv run gunicorn --bind 0.0.0.0:8000 mesbah.wsgi
