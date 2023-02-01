@@ -8,4 +8,3 @@ RUN pipenv install --ignore-pipfile
 
 COPY ./compose/production/django/start /start
 
-ENTRYPOINT ["/start"]
