@@ -17,3 +17,4 @@ from whitenoise import WhiteNoise
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mesbah.settings")
 
 application = WhiteNoise(get_wsgi_application(), root=settings.STATIC_ROOT)
+application.add_files(root=settings.MEDIA_ROOT)
