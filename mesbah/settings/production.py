@@ -26,6 +26,26 @@ DATABASES = {
     }
 }
 
+# ManifestStaticFilesStorage is recommended in production, to prevent outdated
+# JavaScript / CSS assets being served from cache (e.g. after a Wagtail upgrade).
+# See https://docs.djangoproject.com/en/4.1/ref/contrib/staticfiles/#manifeststaticfilesstorage
+
+DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
+STATICFILES_STORAGE = "minio_storage.storage.MinioStaticStorage"
+MINIO_STORAGE_ENDPOINT = env_setting('MINIO_STORAGE_ENDPOINT', '')
+MINIO_STORAGE_ACCESS_KEY = env_setting('MINIO_STORAGE_ACCESS_KEY', None)
+MINIO_STORAGE_SECRET_KEY = env_setting('MINIO_SECRET_KEY', None)
+MINIO_STORAGE_USE_HTTPS = False
+MINIO_STORAGE_MEDIA_BUCKET_NAME = 'media'
+MINIO_STORAGE_STATIC_BUCKET_NAME = 'static'
+MINIO_STORAGE_AUTO_CREATE_MEDIA_BUCKET = True
+MINIO_STORAGE_AUTO_CREATE_STATIC_BUCKET = True
+
+STATIC_URL = "{minio_url}/static/".format(minio_url=MINIO_STORAGE_ENDPOINT)
+
+MEDIA_URL = "{minio_url}/media/".format(minio_url=MINIO_STORAGE_ENDPOINT)
+
+
 # Sentry settings
 
 SENTRY_DSN = env_setting('SENTRY_DSN')
@@ -45,14 +65,3 @@ sentry_sdk.init(
     # django.contrib.auth) you may enable sending PII data.
     send_default_pii=True
 )
-
-DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
-STATICFILES_STORAGE = "minio_storage.storage.MinioStaticStorage"
-MINIO_STORAGE_ENDPOINT = env_setting('MINIO_STORAGE_ENDPOINT', 'minio.mesbah.svc:9000')
-MINIO_STORAGE_ACCESS_KEY = env_setting('MINIO_STORAGE_ACCESS_KEY', None)
-MINIO_STORAGE_SECRET_KEY = env_setting('MINIO_SECRET_KEY', None)
-MINIO_STORAGE_USE_HTTPS = False
-MINIO_STORAGE_MEDIA_BUCKET_NAME = 'media'
-MINIO_STORAGE_STATIC_BUCKET_NAME = 'static'
-MINIO_STORAGE_AUTO_CREATE_MEDIA_BUCKET = True
-MINIO_STORAGE_AUTO_CREATE_STATIC_BUCKET = True
