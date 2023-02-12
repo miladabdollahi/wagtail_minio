@@ -41,9 +41,10 @@ MINIO_STORAGE_STATIC_BUCKET_NAME = 'static'
 MINIO_STORAGE_AUTO_CREATE_MEDIA_BUCKET = True
 MINIO_STORAGE_AUTO_CREATE_STATIC_BUCKET = True
 
-STATIC_URL = "{minio_url}/static/".format(minio_url=MINIO_STORAGE_ENDPOINT)
+MINIO_STORAGE_DOMAIN = env_setting('MINIO_STORAGE_DOMAIN', '')
+STATIC_URL = "{minio_domain}/static/".format(minio_domain=MINIO_STORAGE_DOMAIN)
 
-MEDIA_URL = "{minio_url}/media/".format(minio_url=MINIO_STORAGE_ENDPOINT)
+MEDIA_URL = "{minio_domain}/media/".format(minio_domain=MINIO_STORAGE_DOMAIN)
 
 
 # Sentry settings
