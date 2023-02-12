@@ -9,12 +9,8 @@ https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/
 
 import os
 
-from django.conf import settings
 from django.core.wsgi import get_wsgi_application
 
-from whitenoise import WhiteNoise
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mesbah.settings.dev")
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mesbah.settings")
-
-application = WhiteNoise(get_wsgi_application(), root=settings.STATIC_ROOT)
-application.add_files(root=settings.MEDIA_ROOT)
+application = get_wsgi_application()
