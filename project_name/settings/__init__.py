@@ -5,6 +5,6 @@ load the production environment.
 
 
 try:
-    from mesbah.settings.local import *
+    from project_name.settings.local import *
 except ImportError:
-    from mesbah.settings.production import *
+    from project_name.settings.production import *

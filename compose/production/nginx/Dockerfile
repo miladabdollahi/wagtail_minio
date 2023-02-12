@@ -4,4 +4,4 @@ WORKDIR /project
 ADD . .
 
 RUN rm /etc/nginx/conf.d/default.conf
-COPY ./compose/production/nginx/sites-enabled/mesbah.conf /etc/nginx/conf.d/default.conf
+COPY ./compose/production/nginx/sites-enabled/project_name.conf /etc/nginx/conf.d/default.conf
